@@ -16,13 +16,14 @@ export const profile = {
     'I build fast, accessible products end-to-end — from wireframe to working code, shipped in production.',
   location: 'Nairobi, Kenya',
   availability: 'Available for work',
+  githubUsername: 'draron-dare-045', // used to pull the live contribution graph
   stats: [
     { label: 'Years experience', value: 3, suffix: '+' },
     { label: 'Projects shipped', value: 24, suffix: '+' },
     { label: 'Happy clients', value: 12, suffix: '+' },
   ],
   socials: {
-    github: 'https://github.com/your-username',
+    github: 'https://github.com/draron-dare-045',
     linkedin: 'https://linkedin.com/in/your-username',
     twitter: 'https://x.com/your-username',
     instagram: 'https://instagram.com/your-username',
