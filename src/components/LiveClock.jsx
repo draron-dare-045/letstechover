@@ -22,7 +22,7 @@ export default function LiveClock() {
   })
 
   return (
-    <div className="fixed top-6 right-6 z-40 hidden sm:flex flex-col items-end font-mono text-xs text-muted select-none pointer-events-none">
+    <div className="hidden lg:flex flex-col items-end font-mono text-xs text-muted select-none leading-tight">
       <span className="text-text tracking-wider tabular-nums">{time}</span>
       <span className="mt-0.5 tracking-wide">{date}</span>
     </div>
