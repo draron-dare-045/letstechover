@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { profile } from '../data'
+import LiveClock from './LiveClock'
 
 const links = [
   { label: 'Home', href: '#home' },
   { label: 'Wall of Fame', href: '#achievements' },
   { label: 'Projects', href: '#projects' },
   { label: 'Services', href: '#services' },
+  { label: 'GitHub', href: '#github' },
 ]
 
 export default function Navbar() {
@@ -44,20 +46,24 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-brand-gradient text-bg font-medium text-sm hover:opacity-90 transition-opacity"
-        >
-          Hire Me
-        </a>
+        <div className="flex items-center gap-6">
+          <LiveClock />
 
-        <button
-          className="md:hidden text-text"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          <a
+            href="#contact"
+            className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-brand-gradient text-bg font-medium text-sm hover:opacity-90 transition-opacity"
+          >
+            Hire Me
+          </a>
+
+          <button
+            className="md:hidden text-text"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {open && (
@@ -77,7 +83,7 @@ export default function Navbar() {
             ))}
             <li>
               <a href="#contact" onClick={() => setOpen(false)} className="text-accent2">
-                Hire Me →
+                {'Hire Me ->'}
               </a>
             </li>
           </ul>

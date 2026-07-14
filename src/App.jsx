@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Preloader from './components/Preloader'
-import LiveClock from './components/LiveClock'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Achievements from './components/Achievements'
@@ -23,7 +22,6 @@ export default function App() {
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <LiveClock />
         <Navbar />
         <main>
           <Hero />
