@@ -29,7 +29,7 @@ export const profile = {
     instagram: 'https://instagram.com/your-username',
   },
   resumeUrl: '#', // link to your CV (Google Drive, etc.)
-  email: 'aron@example.com',
+  email: 'aronondieki045@gmail.com',
   phone: '+254 700 000 000',
 }
 

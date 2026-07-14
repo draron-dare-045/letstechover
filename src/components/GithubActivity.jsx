@@ -8,10 +8,10 @@ const API_URL = `https://github-contributions-api.jogruber.de/v4/${username}?y=a
 
 const LEVEL_CLASSES = [
   'bg-surfaceAlt',
-  'bg-accent1/25',
-  'bg-accent1/50',
-  'bg-accent1/75',
-  'bg-accent1',
+  'bg-[#0e4429]',
+  'bg-[#006d32]',
+  'bg-[#26a641]',
+  'bg-[#39d353]',
 ]
 
 export default function GithubActivity() {
@@ -80,6 +80,22 @@ export default function GithubActivity() {
     if (current.length) result.push(current)
     return result
   }, [filteredDays])
+
+  const monthLabels = useMemo(() => {
+    let lastMonth = null
+    return weeks.map((week) => {
+      const firstDay = week.find((d) => d)
+      if (!firstDay) return ''
+      const month = new Date(firstDay.date).toLocaleString('en-US', { month: 'short' })
+      if (month !== lastMonth) {
+        lastMonth = month
+        return month
+      }
+      return ''
+    })
+  }, [weeks])
+
+  const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', '']
 
   return (
     <section id="github" className="relative py-24 md:py-32">
@@ -159,13 +175,14 @@ export default function GithubActivity() {
               <p className="text-muted font-mono text-sm">
                 Couldn't load live GitHub data right now.
               </p>
+
               <a
                 href={`https://github.com/${username}`}
                 target="_blank"
                 rel="noreferrer"
                 className="text-accent2 text-sm hover:underline"
               >
-                View the profile directly →
+                View the profile directly {'>'}
               </a>
             </div>
           )}
@@ -173,28 +190,54 @@ export default function GithubActivity() {
           {status === 'ready' && weeks.length > 0 && (
             <>
               <div className="overflow-x-auto pb-2">
-                <div className="flex gap-1 min-w-max">
-                  {weeks.map((week, wi) => (
-                    <div key={wi} className="flex flex-col gap-1">
-                      {Array.from({ length: 7 }).map((_, di) => {
-                        const day = week[di]
-                        if (!day) {
-                          return <div key={di} className="w-3 h-3 rounded-sm" />
-                        }
-                        return (
-                          <div
-                            key={di}
-                            title={`${day.date}: ${day.count} contribution${
-                              day.count === 1 ? '' : 's'
-                            }`}
-                            className={`w-3 h-3 rounded-sm ${
-                              LEVEL_CLASSES[day.level] || LEVEL_CLASSES[0]
-                            }`}
-                          />
-                        )
-                      })}
+                <div className="flex gap-2 min-w-max">
+                  <div className="flex flex-col gap-1 pt-4">
+                    {dayLabels.map((label, i) => (
+                      <span
+                        key={i}
+                        className="h-3 leading-3 text-[10px] font-mono text-muted"
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div>
+                    <div className="flex gap-1 mb-1">
+                      {weeks.map((_, wi) => (
+                        <span
+                          key={wi}
+                          className="w-3 leading-3 text-[10px] font-mono text-muted"
+                        >
+                          {monthLabels[wi]}
+                        </span>
+                      ))}
                     </div>
-                  ))}
+
+                    <div className="flex gap-1">
+                      {weeks.map((week, wi) => (
+                        <div key={wi} className="flex flex-col gap-1">
+                          {Array.from({ length: 7 }).map((_, di) => {
+                            const day = week[di]
+                            if (!day) {
+                              return <div key={di} className="w-3 h-3 rounded-sm" />
+                            }
+                            return (
+                              <div
+                                key={di}
+                                title={`${day.date}: ${day.count} contribution${
+                                  day.count === 1 ? '' : 's'
+                                }`}
+                                className={`w-3 h-3 rounded-sm ${
+                                  LEVEL_CLASSES[day.level] || LEVEL_CLASSES[0]
+                                }`}
+                              />
+                            )
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
